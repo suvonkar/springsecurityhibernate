@@ -7,8 +7,6 @@
 	<http auto-config="true" use-expressions="true">
 		<intercept-url pattern="/admin**" access="hasRole('ROLE_ADMIN')" />
 
-		<!-- access denied page -->
-		<access-denied-handler error-page="/403" />
 		<!-- <form-login 
 		    login-page="/login" 
 		    default-target-url="/welcome"
@@ -16,13 +14,20 @@
 			username-parameter="username"
 			password-parameter="password" /> -->
 		<form-login 
-			login-processing-url="/j_spring_security_check" 
-			login-page="/login" 
-			default-target-url="/"
-            authentication-failure-url="/login?error" 
+			login-processing-url="/login/j_spring_security_check" 
+			login-page="/requiredlogin" 
+			authentication-failure-handler-ref="authFailureHandler" 
+			authentication-success-handler-ref="authSuccessHandler"
             username-parameter="username"
             password-parameter="password" />
-		<logout logout-success-url="/login?logout" />
+		<logout logout-success-url="/successlogout" invalidate-session="true"/>
+		
+		<access-denied-handler ref="accessDeniedHandler"/>
+		
+		<session-management invalid-session-url="/sessiontimeout"></session-management>
+		
+		<!-- <custom-filter ref="customFilter" after="EXCEPTION_TRANSLATION_FILTER"/> -->
+		
 		<!-- enable csrf protection -->
 		<csrf />
 		

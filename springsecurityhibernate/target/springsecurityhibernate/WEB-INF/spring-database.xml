@@ -13,11 +13,24 @@
 		<property name="userDao" ref="userDao" />
 	</bean>
 	
+	<bean id="authFailureHandler" class="com.security.web.handler.AuthFailureHandler">
+	</bean>
+	
+	<bean id="authSuccessHandler" class="com.security.web.handler.AuthSuccessHandler">
+	</bean>
+	
+	<bean id="accessDeniedHandler" class="com.security.web.handler.CustomAccessDeniedHandler">
+	</bean>
+	
+	<!-- <bean id="customFilter" class="com.security.web.handler.CustomFilter">
+		<property name="customSessionExpiredErrorCode" value="901"/>
+	</bean> -->
+	
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
 
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://10.195.1.154:3306/test" />
+		<property name="url" value="jdbc:mysql://127.0.0.1:3306/springsecurity" />
 		<property name="username" value="root" />
 		<property name="password" value="admin" />
 		<!-- <property name="password" value="password" /> -->
